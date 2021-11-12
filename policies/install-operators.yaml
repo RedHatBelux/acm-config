@@ -38,7 +38,7 @@ spec:
                   sourceNamespace: openshift-marketplace
           remediationAction: inform
           severity: high
-  remediationAction: inform
+  remediationAction: enforce
   placement:
     - placementBinding: binding-serverless-installed
       placementRule: placement-serverless-installed
