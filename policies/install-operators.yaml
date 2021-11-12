@@ -38,7 +38,7 @@ spec:
                   sourceNamespace: openshift-marketplace
           remediationAction: inform
           severity: high
-          - objectDefinition:
+    - objectDefinition:
         kind: Project
         apiVersion: project.openshift.io/v1
         metadata:
