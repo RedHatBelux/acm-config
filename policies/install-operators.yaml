@@ -36,34 +36,38 @@ spec:
                   name: serverless-operator
                   source: redhat-operators
                   sourceNamespace: openshift-marketplace
-          remediationAction: inform
+            - complianceType: musthave
+              objectDefinition:
+                kind: Project
+                apiVersion: project.openshift.io/v1
+                metadata:
+                  name: knative-serving
+                  spec: {}
+            - complianceType: musthave
+              objectDefinition:
+                kind: Project
+                apiVersion: project.openshift.io/v1
+                metadata:
+                  name: knative-eventing
+                spec: {}
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: operator.knative.dev/v1alpha1
+                kind: KnativeServing
+                metadata:
+                  name: knative-serving
+                  namespace: knative-serving
+                spec: {}
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: operator.knative.dev/v1alpha1
+                kind: KnativeEventing
+                metadata:
+                  name: knative-eventing
+                  namespace: knative-eventing
+                spec: {}
+          remediationAction: enforce
           severity: high
-    - objectDefinition:
-        kind: Project
-        apiVersion: project.openshift.io/v1
-        metadata:
-          name: knative-serving
-          spec: {}
-    - objectDefinition:
-        kind: Project
-        apiVersion: project.openshift.io/v1
-        metadata:
-          name: knative-eventing
-        spec: {}
-    - objectDefinition:
-        apiVersion: operator.knative.dev/v1alpha1
-        kind: KnativeServing
-        metadata:
-          name: knative-serving
-          namespace: knative-serving
-        spec: {}
-    - objectDefinition:
-        apiVersion: operator.knative.dev/v1alpha1
-        kind: KnativeEventing
-        metadata:
-          name: knative-eventing
-          namespace: knative-eventing
-        spec: {}
   remediationAction: enforce
   placement:
     - placementBinding: binding-serverless-installed
