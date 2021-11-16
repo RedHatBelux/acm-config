@@ -93,9 +93,6 @@ subjects:
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  annotations:
-    open-cluster-management.io/user-group: c3lzdGVtOmF1dGhlbnRpY2F0ZWQ6b2F1dGgsc3lzdGVtOmF1dGhlbnRpY2F0ZWQ=
-    open-cluster-management.io/user-identity: YWRtaW4=
   generation: 1
   managedFields:
     - apiVersion: apps.open-cluster-management.io/v1
