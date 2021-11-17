@@ -59,12 +59,6 @@ metadata:
   name: placement-web-terminal-installed
   namespace: hive
 spec:
-  clusterConditions:
-    - status: 'True'
-      type: ManagedClusterConditionAvailable
   clusterSelector:
-    matchExpressions:
-      - key: vendor
-        operator: In
-        values:
-          - OpenShift
+    matchLabels:
+      'local-cluster': 'true'
