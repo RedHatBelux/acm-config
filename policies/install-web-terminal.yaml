@@ -1,0 +1,68 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  annotations:
+    policy.open-cluster-management.io/categories: ''
+    policy.open-cluster-management.io/controls: ''
+    policy.open-cluster-management.io/standards: ''
+  name: web-terminal-installed
+  namespace: hive
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: web-terminal-config-policy
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: operators.coreos.com/v1alpha1
+                kind: Subscription
+                metadata:
+                  name: web-terminal
+                  namespace: openshift-operators
+                spec:
+                  channel: fast
+                  installPlanApproval: Automatic
+                  name: web-terminal
+                  source: redhat-operators
+                  sourceNamespace: openshift-marketplace
+          remediationAction: enforce
+          severity: high
+  remediationAction: enforce
+  placement:
+    - placementBinding: binding-serverless-installed
+      placementRule: placement-serverless-installed
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-web-terminal-installed
+  namespace: hive
+placementRef:
+  apiGroup: apps.open-cluster-management.io
+  kind: PlacementRule
+  name: placement-web-terminal-installed
+subjects:
+  - apiGroup: policy.open-cluster-management.io
+    kind: Policy
+    name: web-terminal-installed
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-web-terminal-installed
+  namespace: hive
+spec:
+  clusterConditions:
+    - status: 'True'
+      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - key: vendor
+        operator: In
+        values:
+          - OpenShift
