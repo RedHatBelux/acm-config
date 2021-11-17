@@ -24,6 +24,8 @@ spec:
                 metadata:
                   name: web-terminal
                   namespace: openshift-operators
+                  labels:
+                    operators.coreos.com/web-terminal.openshift-operators: ""
                 spec:
                   channel: fast
                   installPlanApproval: Automatic
