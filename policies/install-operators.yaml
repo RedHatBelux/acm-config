@@ -23,7 +23,7 @@ spec:
                 kind: Subscription
                 metadata:
                   name: serverless-operator
-                  namespace: openshift-operators
+                  namespace: openshift-serverless
                 spec:
                   installPlanApproval: Automatic
                   name: serverless-operator
